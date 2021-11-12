@@ -153,3 +153,4 @@ if (score > hiscore) {
     localStorage.setItem('hiscore', score);
 }
 ```
+test
