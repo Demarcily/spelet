@@ -127,8 +127,15 @@ class PlayScene extends Phaser.Scene {
                 this.player.play('walk', true);
             }
         } else {
+            var playerVelocityX = this.player.body.velocity.x;
+            console.log(playerVelocityX);
             // If no keys are pressed, the player keeps still
-            this.player.setVelocityX(0);
+            if (playerVelocityX > 0) {
+                this.player.body.velocity.x -= 2;
+            } else {
+                this.player.body.velocity.x += 2;
+            }
+           
             // Only show the idle animation if the player is footed
             // If this is not included, the player would look idle while jumping
             if (this.player.body.onFloor()) {
