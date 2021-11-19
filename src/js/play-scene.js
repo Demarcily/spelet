@@ -15,7 +15,7 @@ class PlayScene extends Phaser.Scene {
         const map = this.make.tilemap({ key: 'map' });
         // ladda in tilesetbilden till vår tilemap
         const tileset = map.addTilesetImage('jefrens_tilesheet', 'tiles');
-
+        const spawns = map.getObjectLayer('spawns');
         // initiera animationer, detta är flyttat till en egen metod
         // för att göra create metoden mindre rörig
         this.initAnims();
@@ -38,11 +38,11 @@ class PlayScene extends Phaser.Scene {
         // platforms.setCollision(1, true, true);
 
         // skapa en spelare och ge den studs
-        this.player = this.physics.add.sprite(50, 300, 'player');
+        this.player = this.physics.add.sprite( spawns.objects[0].x, spawns.objects[0].y, 'player');
         this.player.setBounce(0.1);
         this.player.setCollideWorldBounds(true);
 
-        this.foe = this.physics.add.sprite(300, 300, 'foe');
+        this.foe = this.physics.add.sprite( spawns.objects[1].x,  spawns.objects[1].y, 'foe');
         this.foe.setBounce(0.1);
         this.foe.setCollideWorldBounds(true);
 
@@ -54,6 +54,7 @@ class PlayScene extends Phaser.Scene {
             immovable: true
         });
 
+      
         // från platforms som skapats från tilemappen
         // kan vi ladda in andra lager
         // i tilemappen finns det ett lager Spikes
